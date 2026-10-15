@@ -26,7 +26,7 @@ upstream behaviour.
 | Time series | `timeseries_retention`, `timeseries_daily_retention`, `timeseries_signal_retention`, `timeseries_signal_interval` |
 | MQTT | `mqtt_host`, `mqtt_port`, `mqtt_username`, `mqtt_password`, `mqtt_ha_discovery`, `mqtt_topic_prefix`, `mqtt_ha_prefix`, `mqtt_retain`, `mqtt_qos`, `mqtt_keepalive`, `mqtt_client_id`, `mqtt_tls` |
 | Control | `mqtt_controls`, `control_secret` (read-only unless set; use at your own risk) |
-| Advanced | `cors_origins` (comma-separated), `rate_limit_enabled`, `rate_limit_max_requests`, `rate_limit_window_seconds`, `rate_limit_max_buckets`, `debug` |
+| Advanced | `cors_origins` (comma-separated; CORS is **disabled** by default), `rate_limit_enabled`, `rate_limit_max_requests`, `rate_limit_window_seconds`, `rate_limit_max_buckets`, `debug` |
 
 Each option maps to the matching `PW_*` / `MQTT_*` environment variable of
 [pypowerwall-server](https://github.com/jasonacox/pypowerwall-server).

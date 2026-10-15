@@ -100,7 +100,10 @@ configuration:
     description: "Reduce el ruido en el registro cuando hay fallos de red repetidos. Por defecto: no."
   cors_origins:
     name: "Avanzado · Orígenes CORS permitidos"
-    description: "Orígenes permitidos para la API, separados por comas (por ejemplo https://a.com, https://b.com). Por defecto: * (todos)."
+    description: "Webs externas autorizadas a llamar a la API desde el navegador (CORS), separadas por comas, por ejemplo https://a.com, https://b.com. Vacío = CORS desactivado (por defecto; la app original permite todos con *)."
+  rate_limit_enabled:
+    name: "Avanzado · Limitar peticiones por IP"
+    description: "Activa el límite de peticiones por IP (1000 por minuto). Por defecto: no."
   rate_limit_max_requests:
     name: "Avanzado · Límite: peticiones por ventana"
     description: "Peticiones permitidas por IP en cada ventana. Solo aplica con el límite activado. Por defecto: 1000."
@@ -110,9 +113,6 @@ configuration:
   rate_limit_max_buckets:
     name: "Avanzado · Límite: IPs vigiladas"
     description: "Máximo de IPs que se vigilan a la vez antes de limpiar las antiguas. Por defecto: 10000."
-  rate_limit_enabled:
-    name: "Avanzado · Limitar peticiones por IP"
-    description: "Activa el límite de peticiones por IP (1000 por minuto). Por defecto: no."
   debug:
     name: "Avanzado · Depuración"
     description: "Activa el registro de depuración. Por defecto: no."

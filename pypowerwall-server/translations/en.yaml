@@ -100,7 +100,10 @@ configuration:
     description: "Reduce log noise on repeated network failures. Default: no."
   cors_origins:
     name: "Avanzado · Allowed CORS origins"
-    description: "Origins allowed for the API, comma-separated (e.g. https://a.com, https://b.com). Default: * (all)."
+    description: "External sites allowed to call the API from a browser (CORS), comma-separated, e.g. https://a.com, https://b.com. Empty = CORS disabled (default; upstream allows all with *)."
+  rate_limit_enabled:
+    name: "Avanzado · Rate limit per IP"
+    description: "Enable per-IP request rate limiting (1000 per minute). Default: no."
   rate_limit_max_requests:
     name: "Avanzado · Limit: requests per window"
     description: "Requests allowed per IP in each window. Only applies when rate limiting is enabled. Default: 1000."
@@ -110,9 +113,6 @@ configuration:
   rate_limit_max_buckets:
     name: "Avanzado · Limit: tracked IPs"
     description: "Maximum client IPs tracked before pruning. Default: 10000."
-  rate_limit_enabled:
-    name: "Avanzado · Rate limit per IP"
-    description: "Enable per-IP request rate limiting (1000 per minute). Default: no."
   debug:
     name: "Avanzado · Debug"
     description: "Enable debug logging. Default: no."
