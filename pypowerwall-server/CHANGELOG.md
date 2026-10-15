@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## 0.11.3
+
+- Las opciones de **Configuración** se ordenan por grupos (Conexión, Rendimiento, Aspecto, Series, MQTT, Control y Avanzado); antes las de MQTT aparecían separadas.
+- La **Documentación** pasa de tablas a listas, que se leen bien en el móvil, y el esquema de funcionamiento cabe en pantalla.
+- Descripción de la ficha en español e inglés y logo con texto más grande.
+
 ## 0.11.2
 
 - **CORS desactivado por defecto.** Antes la app permitía llamadas desde cualquier web (`*`). Ahora `cors_origins` viene vacío y bloquea CORS; añade orígenes separados por comas si los necesitas. El panel de la barra lateral y la consola no se ven afectados.

@@ -1,7 +1,7 @@
 name: "PyPowerwall Server"
-version: "0.11.2"
+version: "0.11.3"
 slug: "pypowerwall_server"
-description: "PyPowerwall Server (jasonacox) - local Tesla Powerwall gateway monitoring, console and MQTT"
+description: "Datos en tiempo real y en local de tu Tesla Powerwall en Home Assistant: potencias, batería, red, solar, historial, consola web y MQTT con autodescubrimiento. · Local real-time data from your Tesla Powerwall: power flows, battery, grid, solar, history, web console and MQTT discovery."
 url: "https://github.com/jasonacox/pypowerwall-server"
 arch:
   - amd64
@@ -25,23 +25,26 @@ options:
   pw_gw_pwd: ""
   timezone: "Europe/Madrid"
   gateway_name: "Powerwall"
-  mqtt_host: ""
-  mqtt_port: 1883
-  mqtt_username: ""
-  mqtt_password: ""
-  mqtt_ha_discovery: true
   cache_expire: 5
   timeout: 10
   cache_ttl: 30
   graceful_degradation: true
   tedapi_recovery: true
   tedapi_probe_interval: 30
+  health_check: true
+  fail_fast: false
+  suppress_network_errors: false
   style: "clear"
   neg_solar: false
   timeseries_retention: "24h"
   timeseries_daily_retention: "0"
   timeseries_signal_retention: "30d"
   timeseries_signal_interval: "60s"
+  mqtt_host: ""
+  mqtt_port: 1883
+  mqtt_username: ""
+  mqtt_password: ""
+  mqtt_ha_discovery: true
   mqtt_topic_prefix: "pypowerwall"
   mqtt_ha_prefix: "homeassistant"
   mqtt_retain: true
@@ -51,9 +54,6 @@ options:
   mqtt_tls: false
   mqtt_controls: 0
   control_secret: ""
-  health_check: true
-  fail_fast: false
-  suppress_network_errors: false
   cors_origins: ""
   rate_limit_enabled: false
   rate_limit_max_requests: 1000
@@ -65,23 +65,26 @@ schema:
   pw_gw_pwd: password
   timezone: str
   gateway_name: str?
-  mqtt_host: str?
-  mqtt_port: port
-  mqtt_username: str?
-  mqtt_password: password?
-  mqtt_ha_discovery: bool
   cache_expire: int(1,300)?
   timeout: int(1,120)?
   cache_ttl: int(1,3600)?
   graceful_degradation: bool?
   tedapi_recovery: bool?
   tedapi_probe_interval: int(5,3600)?
+  health_check: bool?
+  fail_fast: bool?
+  suppress_network_errors: bool?
   style: list(clear|black|white|grafana|grafana-dark)?
   neg_solar: bool?
   timeseries_retention: str?
   timeseries_daily_retention: str?
   timeseries_signal_retention: str?
   timeseries_signal_interval: str?
+  mqtt_host: str?
+  mqtt_port: port
+  mqtt_username: str?
+  mqtt_password: password?
+  mqtt_ha_discovery: bool
   mqtt_topic_prefix: str?
   mqtt_ha_prefix: str?
   mqtt_retain: bool?
@@ -91,9 +94,6 @@ schema:
   mqtt_tls: bool?
   mqtt_controls: int(0,31)?
   control_secret: password?
-  health_check: bool?
-  fail_fast: bool?
-  suppress_network_errors: bool?
   cors_origins: str?
   rate_limit_enabled: bool?
   rate_limit_max_requests: int(1,100000)?

@@ -7,11 +7,17 @@ de Jason Cox empaquetado como app de Home Assistant. No está afiliado ni respal
 ## Cómo funciona
 
 ```
- Powerwall / Gateway ──WiFi──► Host de Home Assistant ──► App PyPowerwall Server
-   (192.168.91.1)                  (tu servidor)               │
-                                                               ├─► Consola web (panel "Powerwall" en la barra lateral)
-                                                               ├─► API REST (puerto 8677)
-                                                               └─► MQTT ─► Home Assistant (entidades por autodescubrimiento)
+ Gateway Powerwall
+  (192.168.91.1)
+        │ WiFi
+        ▼
+ Host de Home Assistant
+        │
+        ▼
+ App PyPowerwall Server
+  ├─ Consola web (panel lateral)
+  ├─ API REST (puerto 8677)
+  └─ MQTT → entidades en HA
 ```
 
 1. La app habla con el gateway por la **API local TEDAPI** usando la contraseña de la pegatina del gateway.
@@ -59,77 +65,141 @@ la app se comporta como siempre. Las específicas de MQTT solo se aplican si `mq
 
 ### Conexión
 
-| Opción | Nombre | Valores | Por defecto | Descripción |
-|---|---|---|---|---|
-| `pw_host` | IP del gateway | texto | `192.168.91.1` | Dirección del gateway de la Powerwall. Por defecto: 192.168.91.1. |
-| `pw_gw_pwd` | Contraseña del gateway | contraseña | vacío | Contraseña del gateway (la de la pegatina). Obligatoria. |
-| `timezone` | Zona horaria | texto | `Europe/Madrid` | Zona horaria de la instalación. Por defecto de la app: America/Los_Angeles; aquí: Europe/Madrid. |
-| `gateway_name` | Nombre del dispositivo | texto | `Powerwall` | Nombre que se verá en Home Assistant y en la consola. Por defecto de la app: Default Gateway; aquí: Powerwall. |
+- **`pw_host`** · IP del gateway  
+  texto · por defecto: `192.168.91.1`  
+  Dirección del gateway de la Powerwall. Por defecto: 192.168.91.1.
+- **`pw_gw_pwd`** · Contraseña del gateway  
+  contraseña · por defecto: vacío  
+  Contraseña del gateway (la de la pegatina). Obligatoria.
+- **`timezone`** · Zona horaria  
+  texto · por defecto: `Europe/Madrid`  
+  Zona horaria de la instalación. Por defecto de la app: America/Los_Angeles; aquí: Europe/Madrid.
+- **`gateway_name`** · Nombre del dispositivo  
+  texto · por defecto: `Powerwall`  
+  Nombre que se verá en Home Assistant y en la consola. Por defecto de la app: Default Gateway; aquí: Powerwall.
 
 ### Rendimiento
 
-| Opción | Nombre | Valores | Por defecto | Descripción |
-|---|---|---|---|---|
-| `cache_expire` | Intervalo de consulta (s) | entero 1–300 | `5` | Segundos entre consultas al gateway. Menos = datos más frescos y más carga. Por defecto: 5. |
-| `timeout` | Tiempo de espera (s) | entero 1–120 | `10` | Tiempo máximo de espera de cada petición al gateway. Por defecto: 10. |
-| `cache_ttl` | Antigüedad máx. de la caché (s) | entero 1–3.600 | `30` | Si el gateway no responde se sirven datos en caché de hasta esta antigüedad. Por defecto: 30. |
-| `graceful_degradation` | Usar caché si el gateway falla | sí / no | sí | Sirve los últimos datos conocidos cuando el gateway no responde. Por defecto: sí. |
-| `tedapi_recovery` | Recuperación automática TEDAPI | sí / no | sí | Reintenta solo la conexión TEDAPI si cae al modo solo solar. Por defecto: sí. |
-| `tedapi_probe_interval` | Sondeo TEDAPI (s) | entero 5–3.600 | `30` | Segundos entre comprobaciones de salud de TEDAPI. Por defecto: 30. |
-| `health_check` | Monitor de salud | sí / no | sí | Vigila la salud de la conexión con el gateway. Por defecto: sí. |
-| `fail_fast` | Fallar rápido | sí / no | no | Falla enseguida en vez de reintentar cuando el gateway no responde. Por defecto: no. |
-| `suppress_network_errors` | Ocultar errores de red repetidos | sí / no | no | Reduce el ruido en el registro cuando hay fallos de red repetidos. Por defecto: no. |
+- **`cache_expire`** · Intervalo de consulta (s)  
+  entero 1–300 · por defecto: `5`  
+  Segundos entre consultas al gateway. Menos = datos más frescos y más carga. Por defecto: 5.
+- **`timeout`** · Tiempo de espera (s)  
+  entero 1–120 · por defecto: `10`  
+  Tiempo máximo de espera de cada petición al gateway. Por defecto: 10.
+- **`cache_ttl`** · Antigüedad máx. de la caché (s)  
+  entero 1–3.600 · por defecto: `30`  
+  Si el gateway no responde se sirven datos en caché de hasta esta antigüedad. Por defecto: 30.
+- **`graceful_degradation`** · Usar caché si el gateway falla  
+  sí / no · por defecto: sí  
+  Sirve los últimos datos conocidos cuando el gateway no responde. Por defecto: sí.
+- **`tedapi_recovery`** · Recuperación automática TEDAPI  
+  sí / no · por defecto: sí  
+  Reintenta solo la conexión TEDAPI si cae al modo solo solar. Por defecto: sí.
+- **`tedapi_probe_interval`** · Sondeo TEDAPI (s)  
+  entero 5–3.600 · por defecto: `30`  
+  Segundos entre comprobaciones de salud de TEDAPI. Por defecto: 30.
+- **`health_check`** · Monitor de salud  
+  sí / no · por defecto: sí  
+  Vigila la salud de la conexión con el gateway. Por defecto: sí.
+- **`fail_fast`** · Fallar rápido  
+  sí / no · por defecto: no  
+  Falla enseguida en vez de reintentar cuando el gateway no responde. Por defecto: no.
+- **`suppress_network_errors`** · Ocultar errores de red repetidos  
+  sí / no · por defecto: no  
+  Reduce el ruido en el registro cuando hay fallos de red repetidos. Por defecto: no.
 
 ### Aspecto
 
-| Opción | Nombre | Valores | Por defecto | Descripción |
-|---|---|---|---|---|
-| `style` | Estilo de la pantalla de flujo | `clear` / `black` / `white` / `grafana` / `grafana-dark` | `clear` | Estilo de la pantalla de flujo de potencia. Por defecto: clear. |
-| `neg_solar` | Permitir solar negativo | sí / no | no | Permite valores negativos de producción solar. Por defecto: no. |
+- **`style`** · Estilo de la pantalla de flujo  
+  `clear` / `black` / `white` / `grafana` / `grafana-dark` · por defecto: `clear`  
+  Estilo de la pantalla de flujo de potencia. Por defecto: clear.
+- **`neg_solar`** · Permitir solar negativo  
+  sí / no · por defecto: no  
+  Permite valores negativos de producción solar. Por defecto: no.
 
 ### Series
 
-| Opción | Nombre | Valores | Por defecto | Descripción |
-|---|---|---|---|---|
-| `timeseries_retention` | Retención de muestras (5 s) | texto | `24h` | Cuánto se guardan las muestras cada 5 s: 24h, 7d, 30d, 365d; 0 = ilimitado; -1 = desactivar el almacén. Por defecto: 24h. |
-| `timeseries_daily_retention` | Retención de totales diarios | texto | `0` | Cuánto se guardan los totales diarios en kWh; 0 = ilimitado. Por defecto: 0. |
-| `timeseries_signal_retention` | Retención de temperaturas y ventiladores | texto | `30d` | Cuánto se guardan temperaturas y ventiladores; 0 = ilimitado; -1 = no registrar. Por defecto: 30d. |
-| `timeseries_signal_interval` | Intervalo de temperaturas y ventiladores | texto | `60s` | Cada cuánto se toma una muestra (mínimo 30s). Por defecto: 60s. |
+- **`timeseries_retention`** · Retención de muestras (5 s)  
+  texto · por defecto: `24h`  
+  Cuánto se guardan las muestras cada 5 s: 24h, 7d, 30d, 365d; 0 = ilimitado; -1 = desactivar el almacén. Por defecto: 24h.
+- **`timeseries_daily_retention`** · Retención de totales diarios  
+  texto · por defecto: `0`  
+  Cuánto se guardan los totales diarios en kWh; 0 = ilimitado. Por defecto: 0.
+- **`timeseries_signal_retention`** · Retención de temperaturas y ventiladores  
+  texto · por defecto: `30d`  
+  Cuánto se guardan temperaturas y ventiladores; 0 = ilimitado; -1 = no registrar. Por defecto: 30d.
+- **`timeseries_signal_interval`** · Intervalo de temperaturas y ventiladores  
+  texto · por defecto: `60s`  
+  Cada cuánto se toma una muestra (mínimo 30s). Por defecto: 60s.
 
 ### MQTT
 
-| Opción | Nombre | Valores | Por defecto | Descripción |
-|---|---|---|---|---|
-| `mqtt_host` | Servidor MQTT | texto | vacío | Host del broker (por ejemplo core-mosquitto). Vacío = MQTT desactivado, que es el valor por defecto. |
-| `mqtt_port` | Puerto MQTT | puerto (1–65535) | `1883` | Puerto del broker. Por defecto: 1883. |
-| `mqtt_username` | Usuario MQTT | texto | vacío | Usuario del broker. Por defecto: vacío. |
-| `mqtt_password` | Contraseña MQTT | contraseña | vacío | Contraseña del broker. Por defecto: vacía. |
-| `mqtt_ha_discovery` | Autodescubrimiento en HA | sí / no | sí | Crea las entidades en Home Assistant automáticamente. Por defecto: sí. |
-| `mqtt_topic_prefix` | Prefijo de topics | texto | `pypowerwall` | Prefijo de los topics MQTT. Cambiarlo cambia las entidades que se crean. Por defecto: pypowerwall. |
-| `mqtt_ha_prefix` | Prefijo de descubrimiento | texto | `homeassistant` | Prefijo de descubrimiento de Home Assistant. Por defecto: homeassistant. |
-| `mqtt_retain` | Mensajes retenidos | sí / no | sí | Publica los mensajes como retenidos. Por defecto: sí. |
-| `mqtt_qos` | Calidad de servicio (QoS) | entero 0–2 | `1` | QoS de las publicaciones (0, 1 o 2). Por defecto: 1. |
-| `mqtt_keepalive` | Keepalive (s) | entero 10–600 | `60` | Segundos de keepalive con el broker. Por defecto: 60. |
-| `mqtt_client_id` | ID de cliente | texto | `pypowerwall-server` | Identificador del cliente MQTT. Por defecto: pypowerwall-server. |
-| `mqtt_tls` | Usar TLS | sí / no | no | Conecta al broker con TLS. Por defecto: no. |
+- **`mqtt_host`** · Servidor MQTT  
+  texto · por defecto: vacío  
+  Host del broker (por ejemplo core-mosquitto). Vacío = MQTT desactivado, que es el valor por defecto.
+- **`mqtt_port`** · Puerto MQTT  
+  puerto (1–65535) · por defecto: `1883`  
+  Puerto del broker. Por defecto: 1883.
+- **`mqtt_username`** · Usuario MQTT  
+  texto · por defecto: vacío  
+  Usuario del broker. Por defecto: vacío.
+- **`mqtt_password`** · Contraseña MQTT  
+  contraseña · por defecto: vacío  
+  Contraseña del broker. Por defecto: vacía.
+- **`mqtt_ha_discovery`** · Autodescubrimiento en HA  
+  sí / no · por defecto: sí  
+  Crea las entidades en Home Assistant automáticamente. Por defecto: sí.
+- **`mqtt_topic_prefix`** · Prefijo de topics  
+  texto · por defecto: `pypowerwall`  
+  Prefijo de los topics MQTT. Cambiarlo cambia las entidades que se crean. Por defecto: pypowerwall.
+- **`mqtt_ha_prefix`** · Prefijo de descubrimiento  
+  texto · por defecto: `homeassistant`  
+  Prefijo de descubrimiento de Home Assistant. Por defecto: homeassistant.
+- **`mqtt_retain`** · Mensajes retenidos  
+  sí / no · por defecto: sí  
+  Publica los mensajes como retenidos. Por defecto: sí.
+- **`mqtt_qos`** · Calidad de servicio (QoS)  
+  entero 0–2 · por defecto: `1`  
+  QoS de las publicaciones (0, 1 o 2). Por defecto: 1.
+- **`mqtt_keepalive`** · Keepalive (s)  
+  entero 10–600 · por defecto: `60`  
+  Segundos de keepalive con el broker. Por defecto: 60.
+- **`mqtt_client_id`** · ID de cliente  
+  texto · por defecto: `pypowerwall-server`  
+  Identificador del cliente MQTT. Por defecto: pypowerwall-server.
+- **`mqtt_tls`** · Usar TLS  
+  sí / no · por defecto: no  
+  Conecta al broker con TLS. Por defecto: no.
 
 ### Control
 
-| Opción | Nombre | Valores | Por defecto | Descripción |
-|---|---|---|---|---|
-| `mqtt_controls` | Controles desde HA (máscara) | entero 0–31 | `0` | Activa controles en HA, bajo tu responsabilidad: 1 reserva, 2 modo, 4 carga desde red, 8 exportación, 16 islanding; se suman (15 = todo menos islanding). Necesita la clave de control y usuario y contraseña MQTT. Por defecto: 0 (solo lectura). |
-| `control_secret` | Clave de control | contraseña | vacío | Activa la API /control y el panel de control de la consola. Por defecto: vacía (solo lectura). |
+- **`mqtt_controls`** · Controles desde HA (máscara)  
+  entero 0–31 · por defecto: `0`  
+  Activa controles en HA, bajo tu responsabilidad: 1 reserva, 2 modo, 4 carga desde red, 8 exportación, 16 islanding; se suman (15 = todo menos islanding). Necesita la clave de control y usuario y contraseña MQTT. Por defecto: 0 (solo lectura).
+- **`control_secret`** · Clave de control  
+  contraseña · por defecto: vacío  
+  Activa la API /control y el panel de control de la consola. Por defecto: vacía (solo lectura).
 
 ### Avanzado
 
-| Opción | Nombre | Valores | Por defecto | Descripción |
-|---|---|---|---|---|
-| `cors_origins` | Orígenes CORS permitidos | texto | vacío | Webs externas autorizadas a llamar a la API desde el navegador (CORS), separadas por comas, por ejemplo https://a.com, https://b.com. Vacío = CORS desactivado (por defecto; la app original permite todos con *). |
-| `rate_limit_enabled` | Limitar peticiones por IP | sí / no | no | Activa el límite de peticiones por IP (1000 por minuto). Por defecto: no. |
-| `rate_limit_max_requests` | Límite: peticiones por ventana | entero 1–100.000 | `1000` | Peticiones permitidas por IP en cada ventana. Solo aplica con el límite activado. Por defecto: 1000. |
-| `rate_limit_window_seconds` | Límite: duración de la ventana (s) | entero 1–3.600 | `60` | Duración de la ventana del límite, en segundos. Por defecto: 60. |
-| `rate_limit_max_buckets` | Límite: IPs vigiladas | entero 100–1.000.000 | `10000` | Máximo de IPs que se vigilan a la vez antes de limpiar las antiguas. Por defecto: 10000. |
-| `debug` | Depuración | sí / no | no | Activa el registro de depuración. Por defecto: no. |
+- **`cors_origins`** · Orígenes CORS permitidos  
+  texto · por defecto: vacío  
+  Webs externas autorizadas a llamar a la API desde el navegador (CORS), separadas por comas, por ejemplo https://a.com, https://b.com. Vacío = CORS desactivado (por defecto; la app original permite todos con *).
+- **`rate_limit_enabled`** · Limitar peticiones por IP  
+  sí / no · por defecto: no  
+  Activa el límite de peticiones por IP (1000 por minuto). Por defecto: no.
+- **`rate_limit_max_requests`** · Límite: peticiones por ventana  
+  entero 1–100.000 · por defecto: `1000`  
+  Peticiones permitidas por IP en cada ventana. Solo aplica con el límite activado. Por defecto: 1000.
+- **`rate_limit_window_seconds`** · Límite: duración de la ventana (s)  
+  entero 1–3.600 · por defecto: `60`  
+  Duración de la ventana del límite, en segundos. Por defecto: 60.
+- **`rate_limit_max_buckets`** · Límite: IPs vigiladas  
+  entero 100–1.000.000 · por defecto: `10000`  
+  Máximo de IPs que se vigilan a la vez antes de limpiar las antiguas. Por defecto: 10000.
+- **`debug`** · Depuración  
+  sí / no · por defecto: no  
+  Activa el registro de depuración. Por defecto: no.
 
 ## Controles (riesgo)
 
