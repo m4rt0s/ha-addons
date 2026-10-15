@@ -89,6 +89,27 @@ configuration:
   control_secret:
     name: "Control · Clave de control"
     description: "Activa la API /control y el panel de control de la consola. Por defecto: vacía (solo lectura)."
+  health_check:
+    name: "Rendimiento · Monitor de salud"
+    description: "Vigila la salud de la conexión con el gateway. Por defecto: sí."
+  fail_fast:
+    name: "Rendimiento · Fallar rápido"
+    description: "Falla enseguida en vez de reintentar cuando el gateway no responde. Por defecto: no."
+  suppress_network_errors:
+    name: "Rendimiento · Ocultar errores de red repetidos"
+    description: "Reduce el ruido en el registro cuando hay fallos de red repetidos. Por defecto: no."
+  cors_origins:
+    name: "Avanzado · Orígenes CORS permitidos"
+    description: "Orígenes permitidos para la API, separados por comas (por ejemplo https://a.com, https://b.com). Por defecto: * (todos)."
+  rate_limit_max_requests:
+    name: "Avanzado · Límite: peticiones por ventana"
+    description: "Peticiones permitidas por IP en cada ventana. Solo aplica con el límite activado. Por defecto: 1000."
+  rate_limit_window_seconds:
+    name: "Avanzado · Límite: duración de la ventana (s)"
+    description: "Duración de la ventana del límite, en segundos. Por defecto: 60."
+  rate_limit_max_buckets:
+    name: "Avanzado · Límite: IPs vigiladas"
+    description: "Máximo de IPs que se vigilan a la vez antes de limpiar las antiguas. Por defecto: 10000."
   rate_limit_enabled:
     name: "Avanzado · Limitar peticiones por IP"
     description: "Activa el límite de peticiones por IP (1000 por minuto). Por defecto: no."

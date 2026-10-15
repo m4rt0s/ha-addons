@@ -1,5 +1,5 @@
 name: "PyPowerwall Server"
-version: "0.11.0"
+version: "0.11.1"
 slug: "pypowerwall_server"
 description: "PyPowerwall Server (jasonacox) - local Tesla Powerwall gateway monitoring, console and MQTT"
 url: "https://github.com/jasonacox/pypowerwall-server"
@@ -51,6 +51,13 @@ options:
   mqtt_tls: false
   mqtt_controls: 0
   control_secret: ""
+  health_check: true
+  fail_fast: false
+  suppress_network_errors: false
+  cors_origins: "*"
+  rate_limit_max_requests: 1000
+  rate_limit_window_seconds: 60
+  rate_limit_max_buckets: 10000
   rate_limit_enabled: false
   debug: false
 schema:
@@ -84,5 +91,12 @@ schema:
   mqtt_tls: bool?
   mqtt_controls: int(0,31)?
   control_secret: password?
+  health_check: bool?
+  fail_fast: bool?
+  suppress_network_errors: bool?
+  cors_origins: str?
+  rate_limit_max_requests: int(1,100000)?
+  rate_limit_window_seconds: int(1,3600)?
+  rate_limit_max_buckets: int(100,1000000)?
   rate_limit_enabled: bool?
   debug: bool?
