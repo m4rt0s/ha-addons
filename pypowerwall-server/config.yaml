@@ -1,5 +1,5 @@
 name: "PyPowerwall Server"
-version: "0.10.1"
+version: "0.10.2"
 slug: "pypowerwall_server"
 description: "PyPowerwall Server (jasonacox) - local Tesla Powerwall gateway monitoring, console and MQTT"
 url: "https://github.com/jasonacox/pypowerwall-server"
@@ -23,6 +23,7 @@ options:
   pw_host: "192.168.91.1"
   pw_gw_pwd: ""
   timezone: "Europe/Madrid"
+  gateway_name: "Powerwall"
   mqtt_host: ""
   mqtt_port: 1883
   mqtt_username: ""
@@ -32,6 +33,7 @@ schema:
   pw_host: str
   pw_gw_pwd: password
   timezone: str
+  gateway_name: str?
   mqtt_host: str?
   mqtt_port: port
   mqtt_username: str?

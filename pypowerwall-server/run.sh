@@ -13,6 +13,19 @@ export PW_HOST="$(get pw_host)"
 export PW_GW_PWD="$(get pw_gw_pwd)"
 export PW_TIMEZONE="$(get timezone)"
 
+# Single-gateway mode hardcodes the name "Default Gateway"; PW_GATEWAYS lets us set it.
+# The id stays "default" so MQTT topics, entity ids and legacy endpoints do not change.
+GW_NAME="$(get gateway_name)"
+if [ -n "$GW_NAME" ]; then
+  PW_GATEWAYS="$(python3 - "$GW_NAME" <<'PY'
+import json, os, sys
+print(json.dumps([{"id": "default", "name": sys.argv[1], "host": os.environ["PW_HOST"],
+                   "gw_pwd": os.environ["PW_GW_PWD"], "timezone": os.environ["PW_TIMEZONE"]}]))
+PY
+)"
+  export PW_GATEWAYS
+fi
+
 MQTT_HOST="$(get mqtt_host)"
 if [ -n "$MQTT_HOST" ]; then
   export MQTT_HOST
