@@ -1,5 +1,5 @@
 name: "PyPowerwall Server"
-version: "0.10.0"
+version: "0.10.1"
 slug: "pypowerwall_server"
 description: "PyPowerwall Server (jasonacox) - local Tesla Powerwall gateway monitoring, console and MQTT"
 url: "https://github.com/jasonacox/pypowerwall-server"
@@ -13,6 +13,11 @@ ports:
   8675/tcp: 8677
 ports_description:
   8675/tcp: "Web console and API"
+ingress: true
+ingress_port: 8675
+panel_icon: "mdi:solar-power"
+panel_title: "Powerwall"
+webui: "http://[HOST]:[PORT:8675]/console"
 watchdog: "http://[HOST]:[PORT:8675]/health"
 options:
   pw_host: "192.168.91.1"
