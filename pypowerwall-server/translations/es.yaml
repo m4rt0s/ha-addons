@@ -1,0 +1,99 @@
+configuration:
+  pw_host:
+    name: "Conexión · IP del gateway"
+    description: "Dirección del gateway de la Powerwall. Por defecto: 192.168.91.1."
+  pw_gw_pwd:
+    name: "Conexión · Contraseña del gateway"
+    description: "Contraseña del gateway (la de la pegatina). Obligatoria."
+  timezone:
+    name: "Conexión · Zona horaria"
+    description: "Zona horaria de la instalación. Por defecto de la app: America/Los_Angeles; aquí: Europe/Madrid."
+  gateway_name:
+    name: "Conexión · Nombre del dispositivo"
+    description: "Nombre que se verá en Home Assistant y en la consola. Por defecto de la app: Default Gateway; aquí: Powerwall."
+  mqtt_host:
+    name: "MQTT · Servidor MQTT"
+    description: "Host del broker (por ejemplo core-mosquitto). Vacío = MQTT desactivado, que es el valor por defecto."
+  mqtt_port:
+    name: "MQTT · Puerto MQTT"
+    description: "Puerto del broker. Por defecto: 1883."
+  mqtt_username:
+    name: "MQTT · Usuario MQTT"
+    description: "Usuario del broker. Por defecto: vacío."
+  mqtt_password:
+    name: "MQTT · Contraseña MQTT"
+    description: "Contraseña del broker. Por defecto: vacía."
+  mqtt_ha_discovery:
+    name: "MQTT · Autodescubrimiento en HA"
+    description: "Crea las entidades en Home Assistant automáticamente. Por defecto: sí."
+  cache_expire:
+    name: "Rendimiento · Intervalo de consulta (s)"
+    description: "Segundos entre consultas al gateway. Menos = datos más frescos y más carga. Por defecto: 5."
+  timeout:
+    name: "Rendimiento · Tiempo de espera (s)"
+    description: "Tiempo máximo de espera de cada petición al gateway. Por defecto: 10."
+  cache_ttl:
+    name: "Rendimiento · Antigüedad máx. de la caché (s)"
+    description: "Si el gateway no responde se sirven datos en caché de hasta esta antigüedad. Por defecto: 30."
+  graceful_degradation:
+    name: "Rendimiento · Usar caché si el gateway falla"
+    description: "Sirve los últimos datos conocidos cuando el gateway no responde. Por defecto: sí."
+  tedapi_recovery:
+    name: "Rendimiento · Recuperación automática TEDAPI"
+    description: "Reintenta solo la conexión TEDAPI si cae al modo solo solar. Por defecto: sí."
+  tedapi_probe_interval:
+    name: "Rendimiento · Sondeo TEDAPI (s)"
+    description: "Segundos entre comprobaciones de salud de TEDAPI. Por defecto: 30."
+  style:
+    name: "Aspecto · Estilo de la pantalla de flujo"
+    description: "Estilo de la pantalla de flujo de potencia. Por defecto: clear."
+  neg_solar:
+    name: "Aspecto · Permitir solar negativo"
+    description: "Permite valores negativos de producción solar. Por defecto: no."
+  timeseries_retention:
+    name: "Series · Retención de muestras (5 s)"
+    description: "Cuánto se guardan las muestras cada 5 s: 24h, 7d, 30d, 365d; 0 = ilimitado; -1 = desactivar el almacén. Por defecto: 24h."
+  timeseries_daily_retention:
+    name: "Series · Retención de totales diarios"
+    description: "Cuánto se guardan los totales diarios en kWh; 0 = ilimitado. Por defecto: 0."
+  timeseries_signal_retention:
+    name: "Series · Retención de temperaturas y ventiladores"
+    description: "Cuánto se guardan temperaturas y ventiladores; 0 = ilimitado; -1 = no registrar. Por defecto: 30d."
+  timeseries_signal_interval:
+    name: "Series · Intervalo de temperaturas y ventiladores"
+    description: "Cada cuánto se toma una muestra (mínimo 30s). Por defecto: 60s."
+  mqtt_topic_prefix:
+    name: "MQTT · Prefijo de topics"
+    description: "Prefijo de los topics MQTT. Cambiarlo cambia las entidades que se crean. Por defecto: pypowerwall."
+  mqtt_ha_prefix:
+    name: "MQTT · Prefijo de descubrimiento"
+    description: "Prefijo de descubrimiento de Home Assistant. Por defecto: homeassistant."
+  mqtt_retain:
+    name: "MQTT · Mensajes retenidos"
+    description: "Publica los mensajes como retenidos. Por defecto: sí."
+  mqtt_qos:
+    name: "MQTT · Calidad de servicio (QoS)"
+    description: "QoS de las publicaciones (0, 1 o 2). Por defecto: 1."
+  mqtt_keepalive:
+    name: "MQTT · Keepalive (s)"
+    description: "Segundos de keepalive con el broker. Por defecto: 60."
+  mqtt_client_id:
+    name: "MQTT · ID de cliente"
+    description: "Identificador del cliente MQTT. Por defecto: pypowerwall-server."
+  mqtt_tls:
+    name: "MQTT · Usar TLS"
+    description: "Conecta al broker con TLS. Por defecto: no."
+  mqtt_controls:
+    name: "Control · Controles desde HA (máscara)"
+    description: "Activa controles en HA, bajo tu responsabilidad: 1 reserva, 2 modo, 4 carga desde red, 8 exportación, 16 islanding; se suman (15 = todo menos islanding). Necesita la clave de control y usuario y contraseña MQTT. Por defecto: 0 (solo lectura)."
+  control_secret:
+    name: "Control · Clave de control"
+    description: "Activa la API /control y el panel de control de la consola. Por defecto: vacía (solo lectura)."
+  rate_limit_enabled:
+    name: "Avanzado · Limitar peticiones por IP"
+    description: "Activa el límite de peticiones por IP (1000 por minuto). Por defecto: no."
+  debug:
+    name: "Avanzado · Depuración"
+    description: "Activa el registro de depuración. Por defecto: no."
+network:
+  8675/tcp: "Consola web y API"

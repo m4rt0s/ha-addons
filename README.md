@@ -13,7 +13,21 @@ Settings → Apps → App store → ⋮ → Repositories → add
 
 ## Options
 
-- `pw_host`: gateway IP (default `192.168.91.1`)
-- `pw_gw_pwd`: gateway password
-- `timezone`
-- `mqtt_*`: broker settings (leave `mqtt_host` empty to disable MQTT)
+All options are shown in the app's **Configuration** tab with a Spanish/English
+name and a description that states the app's **default value**. Optional
+settings are pre-filled with that default, so leaving them untouched keeps the
+upstream behaviour.
+
+| Group | Options |
+|---|---|
+| Connection | `pw_host`, `pw_gw_pwd`, `timezone`, `gateway_name` |
+| Performance | `cache_expire`, `timeout`, `cache_ttl`, `graceful_degradation`, `tedapi_recovery`, `tedapi_probe_interval` |
+| Look | `style`, `neg_solar` |
+| Time series | `timeseries_retention`, `timeseries_daily_retention`, `timeseries_signal_retention`, `timeseries_signal_interval` |
+| MQTT | `mqtt_host`, `mqtt_port`, `mqtt_username`, `mqtt_password`, `mqtt_ha_discovery`, `mqtt_topic_prefix`, `mqtt_ha_prefix`, `mqtt_retain`, `mqtt_qos`, `mqtt_keepalive`, `mqtt_client_id`, `mqtt_tls` |
+| Control | `mqtt_controls`, `control_secret` (read-only unless set; use at your own risk) |
+| Advanced | `rate_limit_enabled`, `debug` |
+
+Each option maps to the matching `PW_*` / `MQTT_*` environment variable of
+[pypowerwall-server](https://github.com/jasonacox/pypowerwall-server).
+MQTT-specific options are only applied when `mqtt_host` is set.

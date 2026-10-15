@@ -1,5 +1,5 @@
 name: "PyPowerwall Server"
-version: "0.10.3"
+version: "0.11.0"
 slug: "pypowerwall_server"
 description: "PyPowerwall Server (jasonacox) - local Tesla Powerwall gateway monitoring, console and MQTT"
 url: "https://github.com/jasonacox/pypowerwall-server"
@@ -30,6 +30,29 @@ options:
   mqtt_username: ""
   mqtt_password: ""
   mqtt_ha_discovery: true
+  cache_expire: 5
+  timeout: 10
+  cache_ttl: 30
+  graceful_degradation: true
+  tedapi_recovery: true
+  tedapi_probe_interval: 30
+  style: "clear"
+  neg_solar: false
+  timeseries_retention: "24h"
+  timeseries_daily_retention: "0"
+  timeseries_signal_retention: "30d"
+  timeseries_signal_interval: "60s"
+  mqtt_topic_prefix: "pypowerwall"
+  mqtt_ha_prefix: "homeassistant"
+  mqtt_retain: true
+  mqtt_qos: 1
+  mqtt_keepalive: 60
+  mqtt_client_id: "pypowerwall-server"
+  mqtt_tls: false
+  mqtt_controls: 0
+  control_secret: ""
+  rate_limit_enabled: false
+  debug: false
 schema:
   pw_host: str
   pw_gw_pwd: password
@@ -40,3 +63,26 @@ schema:
   mqtt_username: str?
   mqtt_password: password?
   mqtt_ha_discovery: bool
+  cache_expire: int(1,300)?
+  timeout: int(1,120)?
+  cache_ttl: int(1,3600)?
+  graceful_degradation: bool?
+  tedapi_recovery: bool?
+  tedapi_probe_interval: int(5,3600)?
+  style: list(clear|black|white|grafana|grafana-dark)?
+  neg_solar: bool?
+  timeseries_retention: str?
+  timeseries_daily_retention: str?
+  timeseries_signal_retention: str?
+  timeseries_signal_interval: str?
+  mqtt_topic_prefix: str?
+  mqtt_ha_prefix: str?
+  mqtt_retain: bool?
+  mqtt_qos: int(0,2)?
+  mqtt_keepalive: int(10,600)?
+  mqtt_client_id: str?
+  mqtt_tls: bool?
+  mqtt_controls: int(0,31)?
+  control_secret: password?
+  rate_limit_enabled: bool?
+  debug: bool?

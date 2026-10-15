@@ -1,0 +1,99 @@
+configuration:
+  pw_host:
+    name: "Conexión · Gateway IP"
+    description: "Powerwall gateway address. Default: 192.168.91.1."
+  pw_gw_pwd:
+    name: "Conexión · Gateway password"
+    description: "Gateway password (printed on the sticker). Required."
+  timezone:
+    name: "Conexión · Time zone"
+    description: "Installation time zone. App default: America/Los_Angeles; here: Europe/Madrid."
+  gateway_name:
+    name: "Conexión · Device name"
+    description: "Name shown in Home Assistant and the console. App default: Default Gateway; here: Powerwall."
+  mqtt_host:
+    name: "MQTT · MQTT broker"
+    description: "Broker host (e.g. core-mosquitto). Empty = MQTT disabled (default)."
+  mqtt_port:
+    name: "MQTT · MQTT port"
+    description: "Broker port. Default: 1883."
+  mqtt_username:
+    name: "MQTT · MQTT user"
+    description: "Broker user. Default: empty."
+  mqtt_password:
+    name: "MQTT · MQTT password"
+    description: "Broker password. Default: empty."
+  mqtt_ha_discovery:
+    name: "MQTT · HA auto-discovery"
+    description: "Create entities in Home Assistant automatically. Default: yes."
+  cache_expire:
+    name: "Rendimiento · Polling interval (s)"
+    description: "Seconds between gateway polls. Lower = fresher data, more load. Default: 5."
+  timeout:
+    name: "Rendimiento · Request timeout (s)"
+    description: "Maximum wait for each gateway request. Default: 10."
+  cache_ttl:
+    name: "Rendimiento · Max cache age (s)"
+    description: "If the gateway is unreachable, cached data up to this age is served. Default: 30."
+  graceful_degradation:
+    name: "Rendimiento · Use cache on gateway failure"
+    description: "Serve last known data when the gateway does not answer. Default: yes."
+  tedapi_recovery:
+    name: "Rendimiento · TEDAPI auto-recovery"
+    description: "Automatically retry TEDAPI if it falls back to solar-only. Default: yes."
+  tedapi_probe_interval:
+    name: "Rendimiento · TEDAPI probe (s)"
+    description: "Seconds between TEDAPI health probes. Default: 30."
+  style:
+    name: "Aspecto · Power flow style"
+    description: "Style of the power flow screen. Default: clear."
+  neg_solar:
+    name: "Aspecto · Allow negative solar"
+    description: "Allow negative solar values. Default: no."
+  timeseries_retention:
+    name: "Series · Raw sample retention"
+    description: "How long 5 s samples are kept: 24h, 7d, 30d, 365d; 0 = unlimited; -1 = disable the store. Default: 24h."
+  timeseries_daily_retention:
+    name: "Series · Daily totals retention"
+    description: "How long daily kWh totals are kept; 0 = unlimited. Default: 0."
+  timeseries_signal_retention:
+    name: "Series · Temperature/fan retention"
+    description: "How long temperature and fan samples are kept; 0 = unlimited; -1 = do not record. Default: 30d."
+  timeseries_signal_interval:
+    name: "Series · Temperature/fan interval"
+    description: "Sampling interval (minimum 30s). Default: 60s."
+  mqtt_topic_prefix:
+    name: "MQTT · Topic prefix"
+    description: "Prefix of the MQTT topics. Changing it changes the entities created. Default: pypowerwall."
+  mqtt_ha_prefix:
+    name: "MQTT · Discovery prefix"
+    description: "Home Assistant discovery prefix. Default: homeassistant."
+  mqtt_retain:
+    name: "MQTT · Retain messages"
+    description: "Publish messages as retained. Default: yes."
+  mqtt_qos:
+    name: "MQTT · QoS"
+    description: "QoS of publications (0, 1 or 2). Default: 1."
+  mqtt_keepalive:
+    name: "MQTT · Keepalive (s)"
+    description: "Keepalive seconds with the broker. Default: 60."
+  mqtt_client_id:
+    name: "MQTT · Client ID"
+    description: "MQTT client identifier. Default: pypowerwall-server."
+  mqtt_tls:
+    name: "MQTT · Use TLS"
+    description: "Connect to the broker with TLS. Default: no."
+  mqtt_controls:
+    name: "Control · HA controls (bitmask)"
+    description: "Enable HA controls, at your own risk: 1 reserve, 2 mode, 4 grid charging, 8 export, 16 islanding; add them up (15 = all but islanding). Needs the control secret and MQTT user/password. Default: 0 (read-only)."
+  control_secret:
+    name: "Control · Control secret"
+    description: "Enables the /control API and the console control panel. Default: empty (read-only)."
+  rate_limit_enabled:
+    name: "Avanzado · Rate limit per IP"
+    description: "Enable per-IP request rate limiting (1000 per minute). Default: no."
+  debug:
+    name: "Avanzado · Debug"
+    description: "Enable debug logging. Default: no."
+network:
+  8675/tcp: "Web console and API"
