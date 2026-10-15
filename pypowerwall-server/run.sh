@@ -38,7 +38,15 @@ fi
 # Ingress: tell the server the path HA serves it under (empty = serve at root)
 if [ -n "${SUPERVISOR_TOKEN:-}" ]; then
   ENTRY="$(curl -s -m 10 -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" http://supervisor/addons/self/info \
-    | python3 -c 'import sys,json; print(json.load(sys.stdin)["data"].get("ingress_entry") or "")' 2>/dev/null || true)"
+    | python3 -c '
+import sys, json, re
+d = json.load(sys.stdin).get("data", {})
+for k in ("ingress_url", "ingress_entry"):
+    m = re.search(r"/api/hassio_ingress/[A-Za-z0-9_-]+", str(d.get(k) or ""))
+    if m:
+        print(m.group(0))
+        break
+' 2>/dev/null || true)"
   if [ -n "$ENTRY" ]; then
     export PROXY_BASE_URL="$ENTRY"
   fi
