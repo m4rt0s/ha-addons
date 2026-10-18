@@ -1,0 +1,15 @@
+configuration:
+  timezone:
+    name: "General · Zona horaria"
+    description: "Zona horaria para gráficas e informes. Por defecto aquí: Europe/Madrid."
+  log_level:
+    name: "General · Nivel de registro"
+    description: "Detalle del registro de la aplicación. Por defecto: INFO."
+  secret_key:
+    name: "Seguridad · Clave secreta"
+    description: "Clave para sesiones y credenciales guardadas. Déjala vacía para generarla sola y conservarla entre reinicios (recomendado)."
+  socketio_allowed_origins:
+    name: "Seguridad · Orígenes permitidos"
+    description: "Orígenes exactos, separados por comas, que pueden abrir el socket en vivo (por ejemplo tras un proxy inverso). Vacío por defecto (solo el mismo origen)."
+network:
+  5050/tcp: "Interfaz web de Nutify"

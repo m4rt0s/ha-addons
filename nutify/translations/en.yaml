@@ -1,0 +1,15 @@
+configuration:
+  timezone:
+    name: "General · Time zone"
+    description: "Time zone used for charts and reports. Default here: Europe/Madrid."
+  log_level:
+    name: "General · Log level"
+    description: "Verbosity of the application log. Default: INFO."
+  secret_key:
+    name: "Security · Secret key"
+    description: "Key for sessions and stored credentials. Leave empty to generate one automatically and keep it across restarts (recommended)."
+  socketio_allowed_origins:
+    name: "Security · Allowed origins"
+    description: "Comma-separated exact origins allowed to open the live socket (for example behind a reverse proxy). Empty by default (same origin only)."
+network:
+  5050/tcp: "Nutify web interface"
