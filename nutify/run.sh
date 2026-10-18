@@ -17,6 +17,10 @@ link /data/logs     /app/nutify/logs
 link /data/ssl      /app/ssl
 link /data/etc-nut  /etc/nut
 
+# The app runs as "nut"; the image entrypoint cannot reach through the symlinks.
+chown -R nut:nut /data/instance /data/logs /data/ssl /data/etc-nut
+chmod 750 /data/etc-nut
+
 # Session/credential key: use the option if set, otherwise generate once and keep it.
 SECRET_KEY="$(get secret_key)"
 if [ -z "$SECRET_KEY" ]; then

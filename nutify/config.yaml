@@ -1,5 +1,5 @@
 name: "Nutify"
-version: "0.3.0"
+version: "0.3.1"
 slug: "nutify"
 description: "Monitorización web de SAI/UPS con gráficas en tiempo real, alertas e informes, sobre Network UPS Tools. · Web UPS monitoring with real-time charts, alerts and reports, built on Network UPS Tools."
 url: "https://github.com/DartSteven/Nutify"
