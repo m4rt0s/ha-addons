@@ -1,5 +1,5 @@
 name: "Nutify"
-version: "0.3.1"
+version: "0.4.0"
 slug: "nutify"
 description: "Monitorización web de SAI/UPS con gráficas en tiempo real, alertas e informes, sobre Network UPS Tools. · Web UPS monitoring with real-time charts, alerts and reports, built on Network UPS Tools."
 url: "https://github.com/DartSteven/Nutify"
@@ -12,8 +12,11 @@ init: false
 ports:
   5050/tcp: 5050
 ports_description:
-  5050/tcp: "Nutify web interface"
-webui: "http://[HOST]:[PORT:5050]"
+  5050/tcp: "Direct web interface (optional, the sidebar uses Ingress)"
+ingress: true
+ingress_port: 8099
+panel_icon: "mdi:battery-heart-variant"
+panel_title: "Nutify"
 options:
   timezone: "Europe/Madrid"
   log_level: "INFO"

@@ -35,4 +35,7 @@ export SOCKETIO_ALLOWED_ORIGINS="$(get socketio_allowed_origins)"
 export NUTIFY_WEB_USER=nut NUT_SERVICE_USER=nut
 export UDEV=0 SKIP_PERMCHECK=true LOG=true LOG_WERKZEUG=true ENABLE_LOG_STARTUP=Y SSL_ENABLED=false
 
+# Ingress front (rewrites paths to the Home Assistant ingress prefix).
+nginx -c /etc/nginx-ingress.conf
+
 exec /usr/local/bin/generate-settings.sh /usr/local/bin/docker-entrypoint /usr/local/bin/start-services.sh

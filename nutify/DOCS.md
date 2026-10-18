@@ -38,7 +38,7 @@ folder and survive updates. They are included in Home Assistant backups.
 
 ## Notes
 
-- Not exposed through Ingress: open the web UI on port `5050`.
+- Opens from the sidebar through Home Assistant Ingress. Nutify itself only works from the root of a host, so an internal nginx rewrites paths on the fly; if an upstream update breaks a page, use the direct port `5050` and report it.
 - Upstream release `0.3.0` is not backward compatible with older Nutify data.
 
 ---
