@@ -1,5 +1,5 @@
 name: "PyPowerwall Server"
-version: "0.11.3"
+version: "0.14.0"
 slug: "pypowerwall_server"
 description: "Datos en tiempo real y en local de tu Tesla Powerwall en Home Assistant: potencias, batería, red, solar, historial, consola web y MQTT con autodescubrimiento. · Local real-time data from your Tesla Powerwall: power flows, battery, grid, solar, history, web console and MQTT discovery."
 url: "https://github.com/jasonacox/pypowerwall-server"
@@ -34,6 +34,7 @@ options:
   health_check: true
   fail_fast: false
   suppress_network_errors: false
+  failover: true
   style: "clear"
   neg_solar: false
   timeseries_retention: "24h"
@@ -54,6 +55,8 @@ options:
   mqtt_tls: false
   mqtt_controls: 0
   control_secret: ""
+  local_first: false
+  battery_dispatch: false
   cors_origins: ""
   rate_limit_enabled: false
   rate_limit_max_requests: 1000
@@ -74,6 +77,7 @@ schema:
   health_check: bool?
   fail_fast: bool?
   suppress_network_errors: bool?
+  failover: bool?
   style: list(clear|black|white|grafana|grafana-dark)?
   neg_solar: bool?
   timeseries_retention: str?
@@ -94,6 +98,8 @@ schema:
   mqtt_tls: bool?
   mqtt_controls: int(0,31)?
   control_secret: password?
+  local_first: bool?
+  battery_dispatch: bool?
   cors_origins: str?
   rate_limit_enabled: bool?
   rate_limit_max_requests: int(1,100000)?

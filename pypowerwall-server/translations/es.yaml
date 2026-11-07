@@ -49,7 +49,7 @@ configuration:
     description: "Estilo de la pantalla de flujo de potencia. Por defecto: clear."
   neg_solar:
     name: "Aspecto · Permitir solar negativo"
-    description: "Permite valores negativos de producción solar. Por defecto: no."
+    description: "Permite valores negativos de producción solar (unas decenas de vatios de noche). Por defecto de la app desde 0.12: sí; aquí: no, para mantener el comportamiento anterior."
   timeseries_retention:
     name: "Series · Retención de muestras (5 s)"
     description: "Cuánto se guardan las muestras cada 5 s: 24h, 7d, 30d, 365d; 0 = ilimitado; -1 = desactivar el almacén. Por defecto: 24h."
@@ -101,6 +101,15 @@ configuration:
   cors_origins:
     name: "Avanzado · Orígenes CORS permitidos"
     description: "Webs externas autorizadas a llamar a la API desde el navegador (CORS), separadas por comas, por ejemplo https://a.com, https://b.com. Vacío = CORS desactivado (por defecto; la app original permite todos con *)."
+  failover:
+    name: "Rendimiento · Conmutación automática de transporte"
+    description: "Si falla la conexión configurada, la app puede usar otra (por ejemplo la nube). Desactívala para fijar la conexión local. Por defecto: sí."
+  local_first:
+    name: "Control · Control local primero"
+    description: "Las escrituras de control (reserva, modo, red) prueban primero la conexión local si está disponible. Por defecto: no."
+  battery_dispatch:
+    name: "Control · Despacho de batería (bajo tu riesgo)"
+    description: "Activa el panel y la API para cargar o descargar la batería a una potencia fija. Puede anular la reserva y la exportación y, según Tesla, afectar a la garantía de la Powerwall. Necesita control_secret. Por defecto: no."
   rate_limit_enabled:
     name: "Avanzado · Limitar peticiones por IP"
     description: "Activa el límite de peticiones por IP (1000 por minuto). Por defecto: no."

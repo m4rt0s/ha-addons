@@ -49,7 +49,7 @@ configuration:
     description: "Style of the power flow screen. Default: clear."
   neg_solar:
     name: "Aspecto · Allow negative solar"
-    description: "Allow negative solar values. Default: no."
+    description: "Allow negative solar values (a few tens of watts overnight). App default since 0.12: yes; here: no, to keep the previous behaviour."
   timeseries_retention:
     name: "Series · Raw sample retention"
     description: "How long 5 s samples are kept: 24h, 7d, 30d, 365d; 0 = unlimited; -1 = disable the store. Default: 24h."
@@ -101,6 +101,15 @@ configuration:
   cors_origins:
     name: "Avanzado · Allowed CORS origins"
     description: "External sites allowed to call the API from a browser (CORS), comma-separated, e.g. https://a.com, https://b.com. Empty = CORS disabled (default; upstream allows all with *)."
+  failover:
+    name: "Rendimiento · Transport failover"
+    description: "If the configured connection fails the app may use another one (for example the cloud). Turn it off to pin the local connection. Default: yes."
+  local_first:
+    name: "Control · Local-first control"
+    description: "Control writes (reserve, mode, grid) try the local connection first when it is up. Default: no."
+  battery_dispatch:
+    name: "Control · Battery dispatch (at your own risk)"
+    description: "Enables the panel and API to charge or discharge the battery at a fixed power. It can override the reserve and export settings and, per Tesla, may affect the Powerwall warranty. Needs control_secret. Default: no."
   rate_limit_enabled:
     name: "Avanzado · Rate limit per IP"
     description: "Enable per-IP request rate limiting (1000 per minute). Default: no."

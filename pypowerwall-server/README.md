@@ -5,7 +5,7 @@ potencias, batería, red, solar, temperaturas, historial diario y consola web in
 Publica por **MQTT** con autodescubrimiento y crea las entidades solo.
 
 - Consola web en el panel *Powerwall* (Ingress) o en el puerto 8677
-- 39 opciones configurables desde la interfaz, con su valor por defecto
+- 42 opciones configurables desde la interfaz, con su valor por defecto
 - Solo lectura por defecto; controles opcionales
 - Basado en [pypowerwall-server](https://github.com/jasonacox/pypowerwall-server)
 

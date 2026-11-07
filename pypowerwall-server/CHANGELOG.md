@@ -1,5 +1,16 @@
 # Registro de cambios
 
+## 0.14.0
+
+- Actualiza PyPowerwall Server de la 0.10.0 a la **0.14.0** (pypowerwall 0.22.2). Cambios que notarás:
+  - Cada batería aparece como su propio dispositivo en Home Assistant (`Powerwall {serie}`); los ids y el historial de las entidades se conservan.
+  - Los endpoints compatibles con el proxy antiguo (`/soe`, `/freq`, `/json`) devuelven lo mismo que el proxy. `/soe` da ahora el nivel bruto del gateway; el escalado de Tesla está en `/api/system_status/soe`.
+  - Nuevos sensores MQTT: tensión y corriente de red.
+  - Reintento automático con espera creciente de la conexión de control.
+- Nuevas opciones: `failover` (conmutación automática de transporte), `local_first` (control local primero) y `battery_dispatch` (despacho de batería, desactivado: puede afectar a la garantía de la Powerwall).
+- `neg_solar` mantiene **no** por defecto en la app de Home Assistant (la app original pasó a **sí** en la 0.12).
+- Las opciones nuevas se pueden dejar vacías: se usa el valor por defecto de la app.
+
 ## 0.11.3
 
 - Las opciones de **Configuración** se ordenan por grupos (Conexión, Rendimiento, Aspecto, Series, MQTT, Control y Avanzado); antes las de MQTT aparecían separadas.

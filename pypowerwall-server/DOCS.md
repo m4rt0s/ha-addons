@@ -107,6 +107,9 @@ la app se comporta como siempre. Las específicas de MQTT solo se aplican si `mq
 - **`suppress_network_errors`** · Ocultar errores de red repetidos  
   sí / no · por defecto: no  
   Reduce el ruido en el registro cuando hay fallos de red repetidos. Por defecto: no.
+- **`failover`** · Conmutación automática de transporte  
+  sí / no · por defecto: sí  
+  Si falla la conexión configurada, la app puede usar otra (por ejemplo la nube). Desactívala para fijar la conexión local. Por defecto: sí.
 
 ### Aspecto
 
@@ -115,7 +118,7 @@ la app se comporta como siempre. Las específicas de MQTT solo se aplican si `mq
   Estilo de la pantalla de flujo de potencia. Por defecto: clear.
 - **`neg_solar`** · Permitir solar negativo  
   sí / no · por defecto: no  
-  Permite valores negativos de producción solar. Por defecto: no.
+  Permite valores negativos de producción solar (unas decenas de vatios de noche). Por defecto de la app desde 0.12: sí; aquí: no, para mantener el comportamiento anterior.
 
 ### Series
 
@@ -179,6 +182,12 @@ la app se comporta como siempre. Las específicas de MQTT solo se aplican si `mq
 - **`control_secret`** · Clave de control  
   contraseña · por defecto: vacío  
   Activa la API /control y el panel de control de la consola. Por defecto: vacía (solo lectura).
+- **`local_first`** · Control local primero  
+  sí / no · por defecto: no  
+  Las escrituras de control (reserva, modo, red) prueban primero la conexión local si está disponible. Por defecto: no.
+- **`battery_dispatch`** · Despacho de batería (bajo tu riesgo)  
+  sí / no · por defecto: no  
+  Activa el panel y la API para cargar o descargar la batería a una potencia fija. Puede anular la reserva y la exportación y, según Tesla, afectar a la garantía de la Powerwall. Necesita control_secret. Por defecto: no.
 
 ### Avanzado
 
