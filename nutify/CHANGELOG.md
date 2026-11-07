@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- Update to upstream **0.3.0** (pre-release). Release notes: https://github.com/DartSteven/Nutify/releases/tag/v0.3.0
+
 ## 0.4.0
 
 - Home Assistant Ingress: Nutify now opens from the sidebar (an internal nginx rewrites absolute paths, redirects and cookies to the ingress prefix).
