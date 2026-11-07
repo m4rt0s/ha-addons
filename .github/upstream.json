@@ -1,0 +1,36 @@
+{
+  "apps": [
+    {
+      "name": "pypowerwall-server",
+      "dir": "pypowerwall-server",
+      "upstream": "jasonacox/pypowerwall-server",
+      "include_prereleases": false,
+      "image": "jasonacox/pypowerwall-server",
+      "tags": ["{v}"],
+      "bump": [
+        {"file": "Dockerfile", "regex": "(ARG PWS_VERSION=)(\\d+\\.\\d+\\.\\d+)"}
+      ],
+      "changelog_lang": "es",
+      "review": [
+        "Compare the release notes with the app options and `run.sh` (new or renamed environment variables, changed defaults).",
+        "After merging, update the app in Home Assistant and check the log and that the Powerwall entities keep updating."
+      ]
+    },
+    {
+      "name": "nutify",
+      "dir": "nutify",
+      "upstream": "DartSteven/Nutify",
+      "include_prereleases": true,
+      "image": "dartsteven/nutify",
+      "tags": ["{v}-amd64", "{v}-raspberrypi5-arm64"],
+      "bump": [
+        {"file": "build.yaml", "regex": "(dartsteven/nutify:)(\\d+\\.\\d+\\.\\d+)(?=-)"}
+      ],
+      "changelog_lang": "en",
+      "review": [
+        "Upstream Nutify releases are pre-releases (public testing): read the notes for breaking changes (0.3.0 needed a clean database).",
+        "The Ingress front (`rootfs/nginx-ingress.conf`) rewrites paths in Nutify's minified JavaScript: after merging, open the app from the sidebar and check the login, a page change and the live charts."
+      ]
+    }
+  ]
+}
