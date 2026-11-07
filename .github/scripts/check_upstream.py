@@ -75,7 +75,7 @@ def changelog_entry(app, addon_ver, up_ver, url, prerelease):
     return (f"## {addon_ver}\n\n- Update to upstream **{up_ver}**{pre}. Release notes: {url}\n\n")
 
 
-def process(app, base, dry):
+def process(app, base, dry, force=False):
     cur = current_version(app)
     if not cur:
         print(f"[{app['name']}] cannot read the current version"); return
@@ -89,7 +89,7 @@ def process(app, base, dry):
     if missing:
         print(f"[{app['name']}] {new} released but image tags are missing: {missing}; waiting"); return
     branch = f"upstream/{app['name']}-{new}"
-    if json.loads(sh("gh", "pr", "list", "--head", branch, "--state", "all", "--json", "number")):
+    if not force and json.loads(sh("gh", "pr", "list", "--head", branch, "--state", "all", "--json", "number")):
         print(f"[{app['name']}] a PR for {new} already exists"); return
     cfg_path = os.path.join(ROOT, app["dir"], "config.yaml")
     addon_cur = re.search(r'^version:\s*"?([\d.]+)"?', open(cfg_path).read(), re.M).group(1)
@@ -123,6 +123,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="main")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--force", action="store_true", help="ignore existing/closed PRs for the same version")
     ap.add_argument("--only")
     a = ap.parse_args()
     cfg = json.load(open(os.path.join(ROOT, ".github", "upstream.json")))
@@ -131,7 +132,7 @@ def main():
         if a.only and a.only != app["name"]:
             continue
         try:
-            process(app, a.base, a.dry_run)
+            process(app, a.base, a.dry_run, a.force)
         except Exception as e:  # keep going with the other apps
             fail += 1
             print(f"[{app['name']}] ERROR: {e}", file=sys.stderr)
