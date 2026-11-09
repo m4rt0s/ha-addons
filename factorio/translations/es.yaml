@@ -1,0 +1,24 @@
+configuration:
+  timezone:
+    name: "General · Zona horaria"
+    description: "Zona horaria del registro y las marcas de tiempo. Por defecto: Europe/Madrid."
+  load_latest_save:
+    name: "Partida · Cargar el último guardado"
+    description: "Arranca desde el guardado más reciente de la carpeta saves. Por defecto: activado."
+  generate_new_save:
+    name: "Partida · Generar mapa nuevo"
+    description: "Crea un mapa nuevo con el nombre de guardado de abajo (se omite si ya existe). Por defecto: desactivado."
+  save_name:
+    name: "Partida · Nombre del guardado"
+    description: "Nombre del fichero de guardado sin .zip. Por defecto: _autosave1."
+  preset:
+    name: "Mapa · Preajuste"
+    description: "Preajuste de generación al crear un mapa nuevo (por ejemplo default, rich-resources, death-world). Por defecto: default."
+  dlc_space_age:
+    name: "Juego · DLC Space Age"
+    description: "Activa la expansión Space Age (los jugadores necesitan el DLC). Por defecto: desactivado."
+  update_mods_on_start:
+    name: "Mods · Actualizar al arrancar"
+    description: "Actualiza los mods de la carpeta mods en cada arranque. Necesita tus credenciales de factorio.com en server-settings.json. Por defecto: desactivado."
+network:
+  34197/udp: "Puerto de juego de Factorio"

@@ -1,0 +1,24 @@
+configuration:
+  timezone:
+    name: "General · Time zone"
+    description: "Time zone for the server log and timestamps. Default: Europe/Madrid."
+  load_latest_save:
+    name: "Save · Load latest save"
+    description: "Start from the most recent save in the saves folder. Default: on."
+  generate_new_save:
+    name: "Save · Generate new save"
+    description: "Create a new map named after the save name below (skipped if it already exists). Default: off."
+  save_name:
+    name: "Save · Save name"
+    description: "Save file name without .zip. Default: _autosave1."
+  preset:
+    name: "Map · Preset"
+    description: "Map generation preset used when a new map is created (for example default, rich-resources, death-world). Default: default."
+  dlc_space_age:
+    name: "Game · Space Age DLC"
+    description: "Enable the Space Age expansion (the game files must match; players need the DLC). Default: off."
+  update_mods_on_start:
+    name: "Mods · Update on start"
+    description: "Update the mods in the mods folder every time the server starts. Needs your factorio.com credentials in server-settings.json. Default: off."
+network:
+  34197/udp: "Factorio game port"

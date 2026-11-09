@@ -1,0 +1,33 @@
+name: "Factorio Server"
+version: "2.0.77"
+slug: "factorio"
+description: "Dedicated Factorio multiplayer server (factoriotools image). · Servidor dedicado de Factorio para multijugador."
+url: "https://github.com/factoriotools/factorio-docker"
+arch:
+  - amd64
+  - aarch64
+startup: services
+boot: auto
+init: false
+map:
+  - addon_config:rw
+ports:
+  34197/udp: 34197
+ports_description:
+  34197/udp: "Factorio game port (UDP)"
+options:
+  timezone: "Europe/Madrid"
+  load_latest_save: true
+  generate_new_save: false
+  save_name: "_autosave1"
+  preset: "default"
+  dlc_space_age: false
+  update_mods_on_start: false
+schema:
+  timezone: str
+  load_latest_save: bool
+  generate_new_save: bool
+  save_name: str
+  preset: str?
+  dlc_space_age: bool
+  update_mods_on_start: bool

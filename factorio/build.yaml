@@ -1,0 +1,3 @@
+build_from:
+  amd64: factoriotools/factorio:2.0.77
+  aarch64: factoriotools/factorio:2.0.77

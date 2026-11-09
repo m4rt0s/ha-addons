@@ -11,3 +11,4 @@ Settings → Apps → App store → ⋮ → Repositories → add
 |---|---|---|
 | [PyPowerwall Server](pypowerwall-server/) | Local real-time data from a Tesla Powerwall, web console, MQTT with Home Assistant discovery | [jasonacox/pypowerwall-server](https://github.com/jasonacox/pypowerwall-server) |
 | [Nutify](nutify/) | Web UPS monitoring on Network UPS Tools: live charts, alerts and reports | [DartSteven/Nutify](https://github.com/DartSteven/Nutify) |
+| [Factorio Server](factorio/) | Dedicated Factorio multiplayer server | [factoriotools/factorio-docker](https://github.com/factoriotools/factorio-docker) |
