@@ -1,5 +1,9 @@
 # Registro de cambios
 
+## 0.16.0
+
+- Actualiza pypowerwall-server a la versión **0.16.0** de upstream. Notas de la versión: https://github.com/jasonacox/pypowerwall-server/releases/tag/v0.16.0
+
 ## 0.14.0
 
 - Actualiza PyPowerwall Server de la 0.10.0 a la **0.14.0** (pypowerwall 0.22.2). Cambios que notarás:

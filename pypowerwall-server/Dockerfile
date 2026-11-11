@@ -1,4 +1,4 @@
-ARG PWS_VERSION=0.14.0
+ARG PWS_VERSION=0.16.0
 FROM jasonacox/pypowerwall-server:${PWS_VERSION}
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
