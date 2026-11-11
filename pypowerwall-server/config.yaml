@@ -1,5 +1,5 @@
 name: "PyPowerwall Server"
-version: "0.14.0"
+version: "0.16.0"
 slug: "pypowerwall_server"
 description: "Datos en tiempo real y en local de tu Tesla Powerwall en Home Assistant: potencias, batería, red, solar, historial, consola web y MQTT con autodescubrimiento. · Local real-time data from your Tesla Powerwall: power flows, battery, grid, solar, history, web console and MQTT discovery."
 url: "https://github.com/jasonacox/pypowerwall-server"
